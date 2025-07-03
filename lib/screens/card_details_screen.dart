@@ -11,10 +11,7 @@ class CardDetailPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: const MicroGardenAppBar(
-        titleWidget: const Text(
-          'CARDS',
-          style: TextStyle(color: Colors.yellow),
-        ),
+        titleWidget: Text('CARDS', style: TextStyle(color: Colors.yellow)),
         showBackButton: true,
       ),
       body: Container(

@@ -18,10 +18,7 @@ class FavoritesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: const MicroGardenAppBar(
-        titleWidget: const Text(
-          'FAVORITES',
-          style: TextStyle(color: Colors.yellow),
-        ),
+        titleWidget: Text('FAVORITES', style: TextStyle(color: Colors.yellow)),
         showBackButton: true,
       ),
       backgroundColor: const Color(0xFF2C2C2C),

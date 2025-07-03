@@ -12,11 +12,11 @@ class MicroGardenAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
 
   const MicroGardenAppBar({
-    Key? key,
+    super.key,
     this.titleWidget,
     this.titleText,
     this.showBackButton = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class MicroGardenAppBarWithCallbacks extends StatelessWidget
   final VoidCallback? onSettingsPressed;
 
   const MicroGardenAppBarWithCallbacks({
-    Key? key,
+    super.key,
     this.titleWidget,
     this.titleText,
     this.showBackButton = false,
@@ -98,7 +98,7 @@ class MicroGardenAppBarWithCallbacks extends StatelessWidget
     this.onFavoritesPressed,
     this.onCardsPressed,
     this.onSettingsPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

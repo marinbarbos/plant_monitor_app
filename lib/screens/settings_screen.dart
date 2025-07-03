@@ -9,10 +9,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MicroGardenAppBar(
-        titleWidget: const Text(
-          'SETTINGS',
-          style: TextStyle(color: Colors.grey),
-        ),
+        titleWidget: Text('SETTINGS', style: TextStyle(color: Colors.grey)),
         showBackButton: true,
       ),
       backgroundColor: const Color(0xFF2C2C2C),

@@ -9,10 +9,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: const MicroGardenAppBar(
-        titleWidget: const Text(
-          'DASHBOARD',
-          style: TextStyle(color: Colors.grey),
-        ),
+        titleWidget: Text('DASHBOARD', style: TextStyle(color: Colors.grey)),
         showBackButton: true,
       ),
       body: Column(

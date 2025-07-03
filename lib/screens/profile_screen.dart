@@ -31,10 +31,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: const MicroGardenAppBar(
-        titleWidget: const Text(
-          'PROFILE',
-          style: TextStyle(color: Colors.grey),
-        ),
+        titleWidget: Text('PROFILE', style: TextStyle(color: Colors.grey)),
         showBackButton: true,
       ),
       body: Column(
