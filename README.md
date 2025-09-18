@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-This project is brought to you by misplaced passion.
+This project is brought to you by poorly timed energy drinks.
