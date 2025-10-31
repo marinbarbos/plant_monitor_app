@@ -104,6 +104,16 @@ class CardsService {
     }
   }
 
+  /// Get card by ID
+  PlantCard getCardByName(String cardName) {
+    try {
+      return _cards!.firstWhere((card) => card.name == cardName);
+    } catch (e) {
+      return _cards!.firstWhere((card) => card.name == 'Placeholder');
+    }
+  }
+
+
   /// Get all unlocked cards
   List<PlantCard> getUnlockedCards() {
     if (_cards == null) return [];

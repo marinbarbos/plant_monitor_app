@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'card_details_screen.dart';
 import '../widgets/navbar.dart';
 import '../models/plant_card.dart';
-import '../../services/cards_service.dart';
+import '../services/cards_service.dart';
+import '../services/favorites_service.dart';
 
 class CardsPage extends StatefulWidget {
   const CardsPage({super.key});
@@ -13,7 +14,9 @@ class CardsPage extends StatefulWidget {
 
 class _CardsPageState extends State<CardsPage> {
   final CardsService _cardsService = CardsService();
+  final FavoritesService _favoritesService = FavoritesService();
   List<PlantCard> _cards = [];
+  List<String> _favoriteIds = [];
   bool _isLoading = true;
   String? _errorMessage;
 
@@ -31,9 +34,11 @@ class _CardsPageState extends State<CardsPage> {
 
     try {
       final cards = await _cardsService.loadCards();
+      final favoriteIds = await _favoritesService.getFavoriteIds();
       if (mounted) {
         setState(() {
           _cards = cards;
+          _favoriteIds = favoriteIds;
           _isLoading = false;
         });
       }
@@ -91,7 +96,7 @@ class _CardsPageState extends State<CardsPage> {
             onPressed: () async {
               await _cardsService.unlockCard(card.id);
               await _loadCards();
-              if (context.mounted) {
+              if (mounted) {
                 Navigator.pop(context);
                 _showCardDetails(card.id);
               }
@@ -110,6 +115,56 @@ class _CardsPageState extends State<CardsPage> {
         context,
         MaterialPageRoute(
           builder: (_) => CardDetailPage(card: card),
+        ),
+      ).then((_) => _loadCards()); // Refresh when returning
+    }
+  }
+
+  Future<void> _toggleFavorite(PlantCard card) async {
+    if (!card.unlocked) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Desbloqueie o card primeiro!'),
+          backgroundColor: Colors.orange,
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    final isFavorite = _favoriteIds.contains(card.id);
+
+    if (!isFavorite) {
+      // Check if favorites are full
+      final isFull = await _favoritesService.isFull();
+      if (isFull) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Você já tem 4 favoritos! Remova um para adicionar outro.'),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 3),
+            ),
+          );
+        }
+        return;
+      }
+    }
+
+    // Toggle favorite
+    await _favoritesService.toggleFavorite(card.id);
+    await _loadCards();
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            isFavorite
+                ? 'Removido dos favoritos'
+                : 'Adicionado aos favoritos!',
+          ),
+          backgroundColor: isFavorite ? Colors.orange : Colors.green,
+          duration: const Duration(seconds: 2),
         ),
       );
     }
@@ -245,6 +300,8 @@ class _CardsPageState extends State<CardsPage> {
   }
 
   Widget _buildCardTile(PlantCard card) {
+    final isFavorite = _favoriteIds.contains(card.id);
+    
     return GestureDetector(
       onTap: () {
         if (card.unlocked) {
@@ -258,90 +315,123 @@ class _CardsPageState extends State<CardsPage> {
           color: card.unlocked ? Colors.grey[800] : Colors.grey[900],
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: card.unlocked ? Colors.amber : Colors.grey[700]!,
+            color: isFavorite
+                ? Colors.pink
+                : (card.unlocked ? Colors.amber : Colors.grey[700]!),
             width: card.unlocked ? 2 : 1,
           ),
           boxShadow: card.unlocked
               ? [
                   BoxShadow(
-                    color: Colors.amber.withValues(alpha:0.3),
+                    color: isFavorite
+                        ? Colors.pink.withValues(alpha:0.3)
+                        : Colors.amber.withValues(alpha:0.3),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),
                 ]
               : null,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            // Card Image or Lock Icon
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: card.unlocked
-                    ? Image.asset(
-                        card.image,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return const Icon(
-                            Icons.eco,
-                            size: 48,
-                            color: Colors.green,
-                          );
-                        },
-                      )
-                    : Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Opacity(
-                            opacity: 0.2,
-                            child: Image.asset(
-                              card.image,
-                              fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Icon(
-                                  Icons.eco,
-                                  size: 48,
-                                  color: Colors.grey,
-                                );
-                              },
-                            ),
+            // Card content
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Card Image or Lock Icon
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: card.unlocked
+                        ? Image.asset(
+                            card.image,
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Icon(
+                                Icons.eco,
+                                size: 48,
+                                color: Colors.green,
+                              );
+                            },
+                          )
+                        : Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Opacity(
+                                opacity: 0.2,
+                                child: Image.asset(
+                                  card.image,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(
+                                      Icons.eco,
+                                      size: 48,
+                                      color: Colors.grey,
+                                    );
+                                  },
+                                ),
+                              ),
+                              const Icon(
+                                Icons.lock,
+                                size: 36,
+                                color: Colors.grey,
+                              ),
+                            ],
                           ),
-                          const Icon(
-                            Icons.lock,
-                            size: 36,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-              ),
+                  ),
+                ),
+
+                // Card Name
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: card.unlocked
+                        ? (isFavorite
+                            ? Colors.pink.withValues(alpha:0.2)
+                            : Colors.amber.withValues(alpha:0.2))
+                        : Colors.grey[850],
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    card.unlocked ? card.name : '???',
+                    style: TextStyle(
+                      color: card.unlocked ? Colors.white : Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
 
-            // Card Name
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-              decoration: BoxDecoration(
-                color: card.unlocked
-                    ? Colors.amber.withValues(alpha:0.3)
-                    : Colors.grey[850],
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  bottomRight: Radius.circular(12),
+            // Favorite Star Button (only show if unlocked)
+            if (card.unlocked)
+              Positioned(
+                top: 4,
+                right: 4,
+                child: GestureDetector(
+                  onTap: () => _toggleFavorite(card),
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha:0.7),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.pink : Colors.white,
+                      size: 18,
+                    ),
+                  ),
                 ),
               ),
-              child: Text(
-                card.unlocked ? card.name : '???',
-                style: TextStyle(
-                  color: card.unlocked ? Colors.white : Colors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
           ],
         ),
       ),
