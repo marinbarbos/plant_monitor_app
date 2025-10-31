@@ -1,0 +1,236 @@
+{
+  "cards": [
+    {
+      "id": "radish",
+      "name": "Rabanete",
+      "scientificName": "Raphanus sativus",
+      "image": "assets/cards/radish.png",
+      "unlocked": false,
+      "summary": "Microgreen picante e crocante, rica em vitaminas",
+      "description": "Os microgreens de rabanete são conhecidos por seu sabor picante e textura crocante. São uma excelente fonte de vitaminas A, B, C, E e K, além de minerais como cálcio, ferro e magnésio. Seu sabor marcante adiciona um toque especial a saladas e sanduíches.",
+      "growthTime": "6-12 dias",
+      "difficulty": "Fácil",
+      "season": "Ano todo",
+      "idealTemperature": "18-24°C",
+      "idealLight": "Luz indireta média a alta",
+      "wateringFrequency": "2-3 vezes ao dia (nebulizar)",
+      "soilMoisture": "60-70%",
+      "harvestHeight": "5-8 cm",
+      "nutritionalBenefits": [
+        "Rico em vitamina C",
+        "Antioxidantes potentes",
+        "Auxilia digestão",
+        "Propriedades anti-inflamatórias"
+      ],
+      "tips": [
+        "Sementes germinam rapidamente em 1-2 dias",
+        "Prefere temperatura ambiente fresca",
+        "Colher quando as folhas cotiledonares estiverem totalmente abertas",
+        "Sabor mais suave se colhido mais cedo"
+      ]
+    },
+    {
+      "id": "broccoli",
+      "name": "Brócolis",
+      "scientificName": "Brassica oleracea var. italica",
+      "image": "assets/cards/broccoli.png",
+      "unlocked": false,
+      "summary": "Superalimento verde repleto de nutrientes essenciais",
+      "description": "Os microgreens de brócolis são considerados um superalimento devido à sua alta concentração de sulforafano, um composto com propriedades anticancerígenas. Possuem um sabor suave e levemente amargo, perfeito para smoothies e saladas.",
+      "growthTime": "8-12 dias",
+      "difficulty": "Fácil",
+      "season": "Ano todo",
+      "idealTemperature": "18-22°C",
+      "idealLight": "Luz média",
+      "wateringFrequency": "2 vezes ao dia",
+      "soilMoisture": "55-65%",
+      "harvestHeight": "4-6 cm",
+      "nutritionalBenefits": [
+        "Alto teor de sulforafano",
+        "Vitaminas A, C e K",
+        "Propriedades anticancerígenas",
+        "Fortalece o sistema imunológico"
+      ],
+      "tips": [
+        "Germinação leva 2-3 dias",
+        "Evite excesso de água para prevenir mofo",
+        "Sabor fica mais intenso com mais luz",
+        "Excelente para sucos verdes"
+      ]
+    },
+    {
+      "id": "sunflower",
+      "name": "Girassol",
+      "scientificName": "Helianthus annuus",
+      "image": "assets/cards/sunflower.png",
+      "unlocked": false,
+      "summary": "Microgreen crocante e nutritivo com sabor de noz",
+      "description": "Os microgreens de girassol são grandes, crocantes e têm um sabor suave de noz. São extremamente nutritivos, ricos em proteínas, vitaminas e minerais. Suas folhas grandes e carnudas os tornam perfeitos para saladas e wraps.",
+      "growthTime": "7-14 dias",
+      "difficulty": "Médio",
+      "season": "Ano todo",
+      "idealTemperature": "18-24°C",
+      "idealLight": "Luz alta após germinação",
+      "wateringFrequency": "2-3 vezes ao dia",
+      "soilMoisture": "65-75%",
+      "harvestHeight": "8-12 cm",
+      "nutritionalBenefits": [
+        "Alto teor de proteína",
+        "Vitaminas B, E e minerais",
+        "Ácidos graxos essenciais",
+        "Promove saúde cardiovascular"
+      ],
+      "tips": [
+        "Requer período escuro inicial (2-3 dias)",
+        "Remover cascas após germinação",
+        "Precisa de boa circulação de ar",
+        "Peso sobre as sementes ajuda germinação"
+      ]
+    },
+    {
+      "id": "pea",
+      "name": "Ervilha",
+      "scientificName": "Pisum sativum",
+      "image": "assets/cards/pea.png",
+      "unlocked": false,
+      "summary": "Doce e crocante, perfeito para iniciantes",
+      "description": "Os microgreens de ervilha são conhecidos por seu sabor doce e refrescante que lembra ervilhas frescas. São incrivelmente fáceis de cultivar e têm folhas tenras e delicadas. Rico em proteínas e vitaminas.",
+      "growthTime": "10-14 dias",
+      "difficulty": "Muito Fácil",
+      "season": "Ano todo",
+      "idealTemperature": "18-22°C",
+      "idealLight": "Luz média a alta",
+      "wateringFrequency": "2 vezes ao dia",
+      "soilMoisture": "60-70%",
+      "harvestHeight": "7-12 cm",
+      "nutritionalBenefits": [
+        "Rico em proteína vegetal",
+        "Vitaminas A, C e ácido fólico",
+        "Fibras digestivas",
+        "Baixo em calorias"
+      ],
+      "tips": [
+        "Ideal para iniciantes",
+        "Germina bem em 2-3 dias",
+        "Pode crescer bem em luz indireta",
+        "Sabor adocicado único"
+      ]
+    },
+    {
+      "id": "arugula",
+      "name": "Rúcula",
+      "scientificName": "Eruca sativa",
+      "image": "assets/cards/arugula.png",
+      "unlocked": false,
+      "summary": "Sabor picante e peppery, cresce rapidamente",
+      "description": "Os microgreens de rúcula têm um sabor forte, picante e levemente amargo. São extremamente fáceis e rápidos de cultivar, germinando em apenas 2-3 dias. Perfeitos para adicionar um toque gourmet a pratos.",
+      "growthTime": "5-8 dias",
+      "difficulty": "Muito Fácil",
+      "season": "Ano todo",
+      "idealTemperature": "16-22°C",
+      "idealLight": "Luz média",
+      "wateringFrequency": "2-3 vezes ao dia",
+      "soilMoisture": "55-65%",
+      "harvestHeight": "4-6 cm",
+      "nutritionalBenefits": [
+        "Antioxidantes poderosos",
+        "Vitaminas A, C e K",
+        "Cálcio e ferro",
+        "Propriedades anti-inflamatórias"
+      ],
+      "tips": [
+        "Um dos mais rápidos para crescer",
+        "Prefere temperaturas mais frescas",
+        "Sabor intensifica com a idade",
+        "Colher cedo para sabor mais suave"
+      ]
+    },
+    {
+      "id": "basil",
+      "name": "Manjericão",
+      "scientificName": "Ocimum basilicum",
+      "image": "assets/cards/basil.png",
+      "unlocked": false,
+      "summary": "Aromático e saboroso, essencial na culinária",
+      "description": "Os microgreens de manjericão têm um aroma e sabor intenso de manjericão fresco. São ligeiramente mais desafiadores de cultivar, mas o resultado vale a pena. Perfeitos para pratos italianos e asiáticos.",
+      "growthTime": "12-18 dias",
+      "difficulty": "Médio",
+      "season": "Primavera-Verão",
+      "idealTemperature": "20-25°C",
+      "idealLight": "Luz alta",
+      "wateringFrequency": "2 vezes ao dia (cuidado com excesso)",
+      "soilMoisture": "50-60%",
+      "harvestHeight": "5-8 cm",
+      "nutritionalBenefits": [
+        "Propriedades antibacterianas",
+        "Vitaminas A e K",
+        "Antioxidantes",
+        "Auxilia digestão"
+      ],
+      "tips": [
+        "Germinação pode levar 5-7 dias",
+        "Sensível ao excesso de água",
+        "Prefere ambiente mais quente",
+        "Aroma intenso ao colher"
+      ]
+    },
+    {
+      "id": "kale",
+      "name": "Couve",
+      "scientificName": "Brassica oleracea var. sabellica",
+      "image": "assets/cards/kale.png",
+      "unlocked": false,
+      "summary": "Superalimento denso em nutrientes",
+      "description": "Os microgreens de couve são um dos mais nutritivos disponíveis, com sabor suave e levemente terroso. São ricos em vitaminas, minerais e antioxidantes. Excelentes para sucos e smoothies.",
+      "growthTime": "8-12 dias",
+      "difficulty": "Fácil",
+      "season": "Ano todo",
+      "idealTemperature": "18-22°C",
+      "idealLight": "Luz média a alta",
+      "wateringFrequency": "2 vezes ao dia",
+      "soilMoisture": "55-65%",
+      "harvestHeight": "5-7 cm",
+      "nutritionalBenefits": [
+        "Extremamente rico em vitamina K",
+        "Vitaminas A, C e cálcio",
+        "Ferro e antioxidantes",
+        "Saúde óssea e cardiovascular"
+      ],
+      "tips": [
+        "Cresce bem em temperaturas frescas",
+        "Sabor fica mais doce com luz adequada",
+        "Muito resistente",
+        "Excelente para sucos detox"
+      ]
+    },
+    {
+      "id": "cilantro",
+      "name": "Coentro",
+      "scientificName": "Coriandrum sativum",
+      "image": "assets/cards/cilantro.png",
+      "unlocked": false,
+      "summary": "Sabor marcante e aromático",
+      "description": "Os microgreens de coentro têm o característico sabor e aroma do coentro, porém mais suave. São populares na culinária latino-americana e asiática. Crescem lentamente mas valem a espera.",
+      "growthTime": "14-21 dias",
+      "difficulty": "Médio-Difícil",
+      "season": "Ano todo",
+      "idealTemperature": "18-24°C",
+      "idealLight": "Luz média",
+      "wateringFrequency": "2 vezes ao dia",
+      "soilMoisture": "55-65%",
+      "harvestHeight": "6-8 cm",
+      "nutritionalBenefits": [
+        "Propriedades digestivas",
+        "Vitaminas A, C e K",
+        "Antioxidantes",
+        "Auxilia desintoxicação"
+      ],
+      "tips": [
+        "Germinação lenta (7-10 dias)",
+        "Escarificar sementes acelera germinação",
+        "Requer paciência",
+        "Sabor autêntico de coentro"
+      ]
+    }
+  ]
+}

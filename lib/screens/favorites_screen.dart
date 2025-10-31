@@ -13,7 +13,7 @@ class FavoritesScreen extends StatelessWidget {
         'title': 'Primeira Colheita',
         'description': 'Você colheu sua primeira microgreen!',
       },
-      {'type': 'card', 'title': 'Rabanete', 'image': 'assets/cards/radish.png'},
+      {'type': 'card', 'title': 'Rabanete', 'image': 'assets/cards/raddish.png'},
     ];
 
     return Scaffold(

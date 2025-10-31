@@ -1,0 +1,28 @@
+Attributions
+farmer.png <a href="https://www.flaticon.com/free-icons/farmer" title="farmer icons">Farmer icons created by max.icons - Flaticon</a>
+farming.png <a href="https://www.flaticon.com/free-icons/crops" title="crops icons">Crops icons created by piksart - Flaticon</a>
+warmcrop.png <a href="https://www.flaticon.com/free-icons/wither" title="wither icons">Wither icons created by Freepik - Flaticon</a>
+greenhouse.png <a href="https://www.flaticon.com/free-icons/green-house" title="green house icons">Green house icons created by kawalanicon - Flaticon</a>
+yam.png <a href="https://www.flaticon.com/free-icons/vegetable" title="vegetable icons">Vegetable icons created by max.icons - Flaticon</a>
+raddish.png <a href="https://www.flaticon.com/free-icons/vegetable" title="vegetable icons">Vegetable icons created by max.icons - Flaticon</a>
+leek.png <a href="https://www.flaticon.com/free-icons/leek" title="leek icons">Leek icons created by max.icons - Flaticon</a>
+turnip.png <a href="https://www.flaticon.com/free-icons/turnip" title="turnip icons">Turnip icons created by max.icons - Flaticon</a>
+cabbage.png <a href="https://www.flaticon.com/free-icons/cabbage" title="cabbage icons">Cabbage icons created by max.icons - Flaticon</a>
+spinach.png <a href="https://www.flaticon.com/free-icons/spinach" title="spinach icons">Spinach icons created by max.icons - Flaticon</a>
+redcabbage.png <a href="https://www.flaticon.com/free-icons/cabbage" title="cabbage icons">Cabbage icons created by max.icons - Flaticon</a>
+broccoli.png <a href="https://www.flaticon.com/free-icons/broccoli" title="broccoli icons">Broccoli icons created by max.icons - Flaticon</a>
+lettuce.png <a href="https://www.flaticon.com/free-icons/lettuce" title="lettuce icons">Lettuce icons created by max.icons - Flaticon</a>
+fennel.png <a href="https://www.flaticon.com/free-icons/fennel" title="fennel icons">Fennel icons created by max.icons - Flaticon</a>
+onion.png <a href="https://www.flaticon.com/free-icons/onion" title="onion icons">Onion icons created by max.icons - Flaticon</a>
+chard.png <a href="https://www.flaticon.com/free-icons/vegetable" title="vegetable icons">Vegetable icons created by max.icons - Flaticon</a>
+shallot.png <a href="https://www.flaticon.com/free-icons/shallot" title="shallot icons">Shallot icons created by max.icons - Flaticon</a>
+soybean.png <a href="https://www.flaticon.com/free-icons/soybean" title="soybean icons">Soybean icons created by max.icons - Flaticon</a>
+kale.png <a href="https://www.flaticon.com/free-icons/kale" title="kale icons">Kale icons created by max.icons - Flaticon</a>
+celery.png <a href="https://www.flaticon.com/free-icons/celery" title="celery icons">Celery icons created by max.icons - Flaticon</a>
+beet.png <a href="https://www.flaticon.com/free-icons/beet" title="beet icons">Beet icons created by max.icons - Flaticon</a>
+garlic.png <a href="https://www.flaticon.com/free-icons/garlic" title="garlic icons">Garlic icons created by max.icons - Flaticon</a>
+happylittleguy.png <a href="https://www.flaticon.com/free-icons/sprout" title="sprout icons">Sprout icons created by Freepik - Flaticon</a>
+roboticharvesting.png <a href="https://www.flaticon.com/free-icons/harvest-farming" title="harvest farming icons">Harvest farming icons created by Khoirul Huda - Flaticon</a>
+planting.png <a href="https://www.flaticon.com/free-icons/farm-agriculture" title="farm agriculture icons">Farm agriculture icons created by Paul J. - Flaticon</a>
+handsprout.png <a href="https://www.flaticon.com/free-icons/preserve" title="preserve icons">Preserve icons created by Royyan Wijaya - Flaticon</a>
+sprout1.png <a href="https://www.flaticon.com/free-icons/seedling" title="seedling icons">Seedling icons created by Umeicon - Flaticon</a>
