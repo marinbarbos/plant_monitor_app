@@ -91,7 +91,7 @@ class _CardsPageState extends State<CardsPage> {
             onPressed: () async {
               await _cardsService.unlockCard(card.id);
               await _loadCards();
-              if (mounted) {
+              if (context.mounted) {
                 Navigator.pop(context);
                 _showCardDetails(card.id);
               }
@@ -127,7 +127,7 @@ class _CardsPageState extends State<CardsPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.2),
+                color: Colors.amber.withValues(alpha:0.2),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.amber, width: 1),
               ),
@@ -264,7 +264,7 @@ class _CardsPageState extends State<CardsPage> {
           boxShadow: card.unlocked
               ? [
                   BoxShadow(
-                    color: Colors.amber.withOpacity(0.3),
+                    color: Colors.amber.withValues(alpha:0.3),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),
@@ -323,7 +323,7 @@ class _CardsPageState extends State<CardsPage> {
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
               decoration: BoxDecoration(
                 color: card.unlocked
-                    ? Colors.amber.withOpacity(0.2)
+                    ? Colors.amber.withValues(alpha:0.3)
                     : Colors.grey[850],
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(12),

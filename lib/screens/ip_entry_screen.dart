@@ -215,7 +215,7 @@ class _IPInputPageState extends State<IPInputPage> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.blue[900]?.withOpacity(0.3),
+                color: Colors.blue[900]?.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.blue[700]!, width: 1),
               ),

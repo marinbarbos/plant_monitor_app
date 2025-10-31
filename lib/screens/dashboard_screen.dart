@@ -325,7 +325,7 @@ class _DashboardPageState extends State<DashboardPage> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           decoration: BoxDecoration(
-            color: status.statusColor.withOpacity(0.2),
+            color: status.statusColor.withValues(alpha:0.2),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: status.statusColor, width: 2),
           ),
