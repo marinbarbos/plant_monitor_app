@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.2),
+                color: Colors.amber.withValues(alpha:0.2),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.amber, width: 2),
               ),
@@ -247,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.2),
+                        color: Colors.green.withValues(alpha:0.2),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.green),
                       ),
@@ -457,7 +457,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             decoration: BoxDecoration(
               color: isLocked
                   ? Colors.grey[800]
-                  : achievement.difficulty.color.withOpacity(0.2),
+                  : achievement.difficulty.color.withValues(alpha:0.2),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -502,7 +502,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: achievement.difficulty.color.withOpacity(0.2),
+                        color: achievement.difficulty.color.withValues(alpha:0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(

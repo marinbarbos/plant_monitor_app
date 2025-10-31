@@ -257,7 +257,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.1),
+                    color: Colors.green.withValues(alpha:0.1),
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.green, width: 2),
                   ),
@@ -325,10 +325,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.1),
+                    color: Colors.green.withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Colors.green.withOpacity(0.3),
+                      color: Colors.green.withValues(alpha:0.3),
                     ),
                   ),
                   child: Row(
@@ -397,7 +397,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               color: Colors.grey[850],
               borderRadius: BorderRadius.circular(12),
               border: isDanger
-                  ? Border.all(color: Colors.red.withOpacity(0.3), width: 1)
+                  ? Border.all(color: Colors.red.withValues(alpha:0.3), width: 1)
                   : null,
             ),
             child: Row(
@@ -405,7 +405,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: iconColor.withOpacity(0.1),
+                    color: iconColor.withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon, color: iconColor, size: 24),

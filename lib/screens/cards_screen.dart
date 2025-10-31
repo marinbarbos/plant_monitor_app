@@ -96,7 +96,7 @@ class _CardsPageState extends State<CardsPage> {
             onPressed: () async {
               await _cardsService.unlockCard(card.id);
               await _loadCards();
-              if (mounted) {
+              if (context.mounted) {
                 Navigator.pop(context);
                 _showCardDetails(card.id);
               }
