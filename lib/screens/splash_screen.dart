@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/user_service.dart';
 import 'create_user_screen.dart';
 import 'ip_entry_screen.dart';
+import '../services/achievement_tracker.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,8 +19,11 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _scaleAnimation;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
+
+    final tracker = AchievementTracker();
+    await tracker.initialize(); // Checks daily streak
 
     // Initialize animations
     _animationController = AnimationController(

@@ -1,3 +1,4 @@
+import 'package:plant_monitor_1/services/achievement_tracker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/plant_card.dart';
 import 'cards_service.dart';
@@ -52,6 +53,8 @@ class FavoritesService {
 
       // Add to favorites
       favoriteIds.add(cardId);
+      AchievementTracker().onFavoriteAdded(_instance.getFavoriteCount() as int);
+      
       await prefs.setStringList(_favoritesKey, favoriteIds);
       return true;
     } catch (e) {

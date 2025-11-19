@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:plant_monitor_1/services/achievement_tracker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/plant_card.dart';
 
@@ -57,6 +58,7 @@ class CardsService {
       unlockedIds.add(cardId);
       await prefs.setStringList(_unlockedCardsKey, unlockedIds.toList());
 
+      AchievementTracker().onCardUnlocked(_instance.getUnlockedCount());
       // Update cached cards
       if (_cards != null) {
         final index = _cards!.indexWhere((card) => card.id == cardId);

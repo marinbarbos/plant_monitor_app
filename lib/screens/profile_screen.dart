@@ -63,67 +63,6 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     }
   }
 
-  Future<void> _showLevelUpDialog() async {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF2C2C2C),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
-          children: [
-            Icon(Icons.celebration, color: Colors.amber, size: 32),
-            SizedBox(width: 12),
-            Text('Subiu de Nível!', style: TextStyle(color: Colors.white)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '🎉',
-              style: TextStyle(fontSize: 60),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Parabéns! Você alcançou o',
-              style: TextStyle(color: Colors.grey[300], fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.amber.withValues(alpha:0.2),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.amber, width: 2),
-              ),
-              child: Text(
-                'Nível ${_user!.level}: ${_user!.levelTitle}',
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Novos desafios desbloqueados!',
-              style: TextStyle(color: Colors.grey[400], fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Continuar'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {

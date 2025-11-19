@@ -247,7 +247,7 @@ class _IPInputPageState extends State<IPInputPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const DashboardPage(),
+                            builder: (_) => const DashboardPage(), // TODO create and reroute to album
                           ),
                         );
                       },
