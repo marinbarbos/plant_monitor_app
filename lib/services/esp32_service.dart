@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ESP32Service {
   static final ESP32Service _instance = ESP32Service._internal();
@@ -11,16 +12,41 @@ class ESP32Service {
   String? _ipAddress;
   Timer? _updateTimer;
   
+  static const String _ipAddressKey = 'esp32_ip_address';
+  
   // Callbacks for data updates
   Function(PlantData)? onDataUpdate;
   Function(String)? onError;
 
-  void setIPAddress(String ip) {
-    _ipAddress = ip;
-  }
-
   String? get ipAddress => _ipAddress;
 
+  Future<void> setIPAddress(String ip) async {
+    _ipAddress = ip;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_ipAddressKey, ip);
+  }
+
+  /// Load IP address from SharedPreferences
+  Future<String?> loadIPAddress() async {
+    if (_ipAddress != null) return _ipAddress;
+    
+    final prefs = await SharedPreferences.getInstance();
+    _ipAddress = prefs.getString(_ipAddressKey);
+    return _ipAddress;
+  }
+
+  /// Check if IP address is saved
+  Future<bool> hasIPAddress() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey(_ipAddressKey);
+  }
+
+  /// Clear saved IP address
+  Future<void> clearIPAddress() async {
+    _ipAddress = null;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_ipAddressKey);
+  }
   /// Fetch sensor data from ESP32
   Future<PlantData?> fetchSensorData() async {
     if (_ipAddress == null) {

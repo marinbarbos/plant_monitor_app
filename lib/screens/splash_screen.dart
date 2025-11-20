@@ -1,5 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:plant_monitor_1/screens/dashboard_screen.dart';
+import 'package:plant_monitor_1/services/esp32_service.dart';
 import '../services/user_service.dart';
 import 'create_user_screen.dart';
 import 'ip_entry_screen.dart';
@@ -19,11 +20,8 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _scaleAnimation;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-
-    final tracker = AchievementTracker();
-    await tracker.initialize(); // Checks daily streak
 
     // Initialize animations
     _animationController = AnimationController(
@@ -48,11 +46,21 @@ class _SplashScreenState extends State<SplashScreen>
     // Start animation
     _animationController.forward();
 
-    // Navigate after delay
-    _navigateAfterDelay();
+    // Initialize tracker and navigate (async operations)
+    _initializeAndNavigate();
   }
 
-  Future<void> _navigateAfterDelay() async {
+  Future<void> _initializeAndNavigate() async {
+    // Initialize achievement tracker
+    final tracker = AchievementTracker();
+    await tracker.initialize(); // Checks daily streak
+
+
+    // Load saved ESP32 IP
+    final esp32Service = ESP32Service();
+    await esp32Service.loadIPAddress();
+    
+    // Wait for splash to display
     await Future.delayed(const Duration(milliseconds: 2500));
 
     if (!mounted) return;
@@ -63,11 +71,19 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
 
-    if (hasUser) {
-      // User exists, go to IP entry
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const IPInputPage()),
-      );
+    if (hasUser) {final hasIP = await esp32Service.hasIPAddress();
+
+      if (hasIP) {
+        // Skip IP entry, go directly to dashboard
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const DashboardPage()),
+        );
+      } else {
+        // No IP saved, go to IP entry
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const IPInputPage()),
+        );
+      }
     } else {
       // New user, go to create user screen
       Navigator.of(context).pushReplacement(
@@ -75,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
       );
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

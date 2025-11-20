@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plant_monitor_1/screens/dashboard_screen.dart';
 import '../services/esp32_service.dart';
+import '../services/achievement_tracker.dart';
+import '../widgets/achievement_widget.dart';
+import 'dashboard_screen.dart';
 
 class IPInputPage extends StatefulWidget {
   const IPInputPage({super.key});
@@ -9,9 +11,11 @@ class IPInputPage extends StatefulWidget {
   State<IPInputPage> createState() => _IPInputPageState();
 }
 
-class _IPInputPageState extends State<IPInputPage> {
+class _IPInputPageState extends State<IPInputPage>
+    with AchievementDialogMixin {
   final TextEditingController _controller = TextEditingController();
   final ESP32Service _esp32Service = ESP32Service();
+  final AchievementTracker _tracker = AchievementTracker();
   String? _errorText;
   bool _isConnecting = false;
 
@@ -22,9 +26,15 @@ class _IPInputPageState extends State<IPInputPage> {
   @override
   void initState() {
     super.initState();
-    // Pre-fill with existing IP if available
-    if (_esp32Service.ipAddress != null) {
-      _controller.text = _esp32Service.ipAddress!;
+    _loadSavedIP();
+  }
+
+  Future<void> _loadSavedIP() async {
+    final savedIP = await _esp32Service.loadIPAddress();
+    if (savedIP != null && mounted) {
+      setState(() {
+        _controller.text = savedIP;
+      });
     }
   }
 
@@ -41,8 +51,8 @@ class _IPInputPageState extends State<IPInputPage> {
       _isConnecting = true;
     });
 
-    // Save IP to service
-    _esp32Service.setIPAddress(ipAddress);
+    // Save IP to SharedPreferences
+    await _esp32Service.setIPAddress(ipAddress);
 
     // Test connection
     final isConnected = await _esp32Service.testConnection();
@@ -50,6 +60,13 @@ class _IPInputPageState extends State<IPInputPage> {
     if (!mounted) return;
 
     if (isConnected) {
+      // Track first connection achievement
+      final leveledUp = await _tracker.onFirstConnection();
+
+      if (leveledUp && mounted) {
+        await showLevelUpDialog();
+      }
+
       // Connection successful
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -80,13 +97,19 @@ class _IPInputPageState extends State<IPInputPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Falha na Conexão'),
+        backgroundColor: const Color(0xFF2C2C2C),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text(
+          'Falha na Conexão',
+          style: TextStyle(color: Colors.white),
+        ),
         content: Text(
           'Não foi possível conectar ao ESP32 em $ipAddress.\n\n'
           'Verifique se:\n'
           '• O dispositivo está ligado\n'
           '• Você está conectado à rede Wi-Fi do ESP32\n'
           '• O endereço IP está correto',
+          style: TextStyle(color: Colors.grey[300]),
         ),
         actions: [
           TextButton(
@@ -105,8 +128,8 @@ class _IPInputPageState extends State<IPInputPage> {
     );
   }
 
-  void _continueAnyway(String ipAddress) {
-    _esp32Service.setIPAddress(ipAddress);
+  void _continueAnyway(String ipAddress) async {
+    // IP is already saved from _validateAndProceed
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => const DashboardPage()),
@@ -215,7 +238,7 @@ class _IPInputPageState extends State<IPInputPage> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.blue[900]?.withValues(alpha:0.3),
+                color: Colors.blue[900]?.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.blue[700]!, width: 1),
               ),
@@ -247,7 +270,7 @@ class _IPInputPageState extends State<IPInputPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const DashboardPage(), // TODO create and reroute to album
+                            builder: (_) => const DashboardPage(),
                           ),
                         );
                       },

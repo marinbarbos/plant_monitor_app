@@ -53,9 +53,9 @@ class FavoritesService {
 
       // Add to favorites
       favoriteIds.add(cardId);
+      await prefs.setStringList(_favoritesKey, favoriteIds);
       AchievementTracker().onFavoriteAdded(_instance.getFavoriteCount() as int);
       
-      await prefs.setStringList(_favoritesKey, favoriteIds);
       return true;
     } catch (e) {
       return false;

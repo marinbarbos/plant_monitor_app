@@ -252,30 +252,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             child: Column(
               children: [
-                // App Icon
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha:0.1),
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.green, width: 2),
-                  ),
-                  child: const Icon(
-                    Icons.eco,
-                    size: 40,
-                    color: Colors.green,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Micro Garden',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 const SizedBox(height: 4),
                 const Text(
                   'Versão 0.0.1',
@@ -322,30 +298,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha:0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Colors.green.withValues(alpha:0.3),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.eco, color: Colors.green, size: 16),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Cuide bem das suas plantas! 🌱',
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
