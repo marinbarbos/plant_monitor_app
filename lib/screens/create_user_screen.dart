@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
+import '../widgets/achievement_widget.dart';
 import 'profile_screen.dart';
 
 class CreateUserScreen extends StatefulWidget {
@@ -9,7 +10,8 @@ class CreateUserScreen extends StatefulWidget {
   State<CreateUserScreen> createState() => _CreateUserScreenState();
 }
 
-class _CreateUserScreenState extends State<CreateUserScreen> {
+class _CreateUserScreenState extends State<CreateUserScreen> 
+    with AchievementNotificationMixin, AchievementDialogMixin {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final UserService _userService = UserService();
@@ -37,11 +39,21 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
           ),
         );
 
+        // The profile_created achievement was already completed in UserService
+        // Check if it caused a level up (unlikely but possible if XP from other sources exists)
+        final user = await _userService.getCurrentUser();
+        if (user != null && user.level > 1 && mounted) {
+          // Show level up dialog if somehow leveled up
+          await showLevelUpDialog();
+        }
+
         // Navigate to profile
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const ProfilePage()),
-        );
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const ProfilePage()),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {

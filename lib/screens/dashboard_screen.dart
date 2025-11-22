@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/navbar.dart';
+import '../widgets/achievement_widget.dart';
 import '../services/esp32_service.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -9,7 +10,8 @@ class DashboardPage extends StatefulWidget {
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage> 
+    with AchievementNotificationMixin {
   final ESP32Service _esp32Service = ESP32Service();
   PlantData? _plantData;
   bool _isLoading = true;
@@ -20,6 +22,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     _initializeService();
+    _trackDailyCheckIn();
   }
 
   void _initializeService() {
@@ -32,6 +35,9 @@ class _DashboardPageState extends State<DashboardPage> {
           _errorMessage = null;
           _lastUpdate = DateTime.now();
         });
+        
+        // Track plant health achievements
+        _trackPlantHealth(data);
       }
     };
 
@@ -48,6 +54,34 @@ class _DashboardPageState extends State<DashboardPage> {
     _esp32Service.startPeriodicUpdates(
       interval: const Duration(minutes: 2),
     );
+  }
+  
+  /// Track daily check-in achievement
+  Future<void> _trackDailyCheckIn() async {
+    await trackDailyCheckIn();
+  }
+  
+  /// Track plant health related achievements
+  Future<void> _trackPlantHealth(PlantData data) async {
+    final healthScore = data.getHealthScore();
+    
+    // Track overall health
+    await trackHealthUpdate(healthScore);
+    
+    // Track temperature if ideal
+    if (data.getTemperatureStatus().toLowerCase() == 'ideal') {
+      await trackIdealTemperature();
+    }
+    
+    // Track moisture if ideal
+    if (data.getSoilMoistureStatus().toLowerCase() == 'ideal') {
+      await trackIdealMoisture();
+    }
+    
+    // Track light if ideal (assuming light is ideal when in optimal range)
+    if (data.getLightStatus().toLowerCase() == 'ideal') {
+      await trackLightAdjustment();
+    }
   }
 
   @override
@@ -68,6 +102,9 @@ class _DashboardPageState extends State<DashboardPage> {
         if (data != null) {
           _plantData = data;
           _lastUpdate = DateTime.now();
+          
+          // Track achievements on manual refresh too
+          _trackPlantHealth(data);
         } else {
           _errorMessage = 'Falha ao atualizar dados';
         }

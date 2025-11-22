@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'card_details_screen.dart';
 import '../widgets/navbar.dart';
+import '../widgets/achievement_widget.dart';
 import '../models/plant_card.dart';
 import '../services/cards_service.dart';
 import '../services/favorites_service.dart';
@@ -12,7 +13,8 @@ class CardsPage extends StatefulWidget {
   State<CardsPage> createState() => _CardsPageState();
 }
 
-class _CardsPageState extends State<CardsPage> {
+class _CardsPageState extends State<CardsPage> 
+    with AchievementNotificationMixin {
   final CardsService _cardsService = CardsService();
   final FavoritesService _favoritesService = FavoritesService();
   List<PlantCard> _cards = [];
@@ -95,6 +97,11 @@ class _CardsPageState extends State<CardsPage> {
             ),
             onPressed: () async {
               await _cardsService.unlockCard(card.id);
+              
+              // Track card unlock achievement with UI feedback
+              final unlockedCount = _cardsService.getUnlockedCount();
+              await trackCardUnlock(unlockedCount);
+              
               await _loadCards();
               if (context.mounted) {
                 Navigator.pop(context);
@@ -153,6 +160,13 @@ class _CardsPageState extends State<CardsPage> {
 
     // Toggle favorite
     await _favoritesService.toggleFavorite(card.id);
+    
+    // Track achievement if adding (not removing)
+    if (!isFavorite) {
+      final favoriteCount = await _favoritesService.getFavoriteCount();
+      await trackFavoriteAdded(favoriteCount);
+    }
+    
     await _loadCards();
 
     if (mounted) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/user_model.dart';
 import '../models/achievement_model.dart';
 import '../services/user_service.dart';
+import '../services/achievement_tracker.dart';
 
 /// Collection of reusable achievement-related widgets
 class AchievementWidgets {
@@ -388,69 +389,6 @@ class _AchievementUnlockedContentState
     super.dispose();
   }
 
-
-  /* Future<void> _showLevelUpDialog() async {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF2C2C2C),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
-          children: [
-            Icon(Icons.celebration, color: Colors.amber, size: 32),
-            SizedBox(width: 12),
-            Text('Subiu de Nível!', style: TextStyle(color: Colors.white)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '🎉',
-              style: TextStyle(fontSize: 60),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Parabéns! Você alcançou o',
-              style: TextStyle(color: Colors.grey[300], fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.amber.withValues(alpha:0.2),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.amber, width: 2),
-              ),
-              child: Text(
-                'Nível ${_user!.level}: ${_user!.levelTitle}',
-                style: const TextStyle(
-                  color: Colors.amber,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Novos desafios desbloqueados!',
-              style: TextStyle(color: Colors.grey[400], fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Continuar'),
-          ),
-        ],
-      ),
-    );
-  }
- */
-
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
@@ -605,5 +543,84 @@ mixin AchievementDialogMixin<T extends StatefulWidget> on State<T> {
   /// Show quick level up notification (snackbar)
   void showQuickLevelUp(UserProfile user) {
     AchievementWidgets.showQuickLevelUp(context, user);
+  }
+}
+
+/// Mixin for centralized achievement tracking with automatic UI feedback
+mixin AchievementNotificationMixin<T extends StatefulWidget> on State<T> {
+  
+  /// Track an achievement and show level up dialog if leveled up
+  Future<void> trackAndNotify(Future<bool> Function() trackingFunction) async {
+    final leveledUp = await trackingFunction();
+    
+    if (leveledUp && mounted) {
+      await AchievementWidgets.showLevelUpDialog(context);
+    }
+  }
+  
+  /// Track card unlock achievement
+  Future<void> trackCardUnlock(int totalUnlockedCount) async {
+    await trackAndNotify(() => 
+      AchievementTracker().onCardUnlocked(totalUnlockedCount)
+    );
+  }
+  
+  /// Track favorite added achievement
+  Future<void> trackFavoriteAdded(int totalFavoritesCount) async {
+    await trackAndNotify(() => 
+      AchievementTracker().onFavoriteAdded(totalFavoritesCount)
+    );
+  }
+  
+  /// Track first connection achievement
+  Future<void> trackFirstConnection() async {
+    await trackAndNotify(() => 
+      AchievementTracker().onFirstConnection()
+    );
+  }
+  
+  /// Track daily check-in
+  Future<void> trackDailyCheckIn() async {
+    await trackAndNotify(() => 
+      AchievementTracker().markDailyCheckIn()
+    );
+  }
+  
+  /// Track plant health achievement
+  Future<void> trackHealthUpdate(int healthScore) async {
+    await trackAndNotify(() => 
+      AchievementTracker().onHealthUpdate(healthScore)
+    );
+  }
+  
+  /// Track ideal temperature achievement
+  Future<void> trackIdealTemperature() async {
+    await trackAndNotify(() => 
+      AchievementTracker().onIdealTemperature()
+    );
+  }
+  
+  /// Track ideal moisture achievement
+  Future<void> trackIdealMoisture() async {
+    await trackAndNotify(() => 
+      AchievementTracker().onIdealMoisture()
+    );
+  }
+  
+  /// Track light adjustment achievement
+  Future<void> trackLightAdjustment() async {
+    await trackAndNotify(() => 
+      AchievementTracker().onLightAdjustment()
+    );
+  }
+  
+  /// Track profile creation achievement (already completed in UserService)
+  Future<void> trackProfileCreated() async {
+    // Profile created achievement is already handled in UserService
+    // This can be called to show any related UI feedback if needed
+    final user = await UserService().getCurrentUser();
+    if (user != null && mounted) {
+      // Could show welcome message or tour here
+    }
   }
 }

@@ -11,13 +11,13 @@ extension AchievementDifficultyExtension on AchievementDifficulty {
   int get xpReward {
     switch (this) {
       case AchievementDifficulty.easy:
-        return 10;
-      case AchievementDifficulty.medium:
         return 25;
-      case AchievementDifficulty.hard:
+      case AchievementDifficulty.medium:
         return 50;
-      case AchievementDifficulty.expert:
+      case AchievementDifficulty.hard:
         return 100;
+      case AchievementDifficulty.expert:
+        return 150;
     }
   }
 
@@ -147,15 +147,6 @@ class AchievementsList {
         name: 'Primeira Descoberta',
         description: 'Desbloqueie seu primeiro card',
         icon: Icons.style,
-        difficulty: AchievementDifficulty.easy,
-        requiredLevel: 1,
-        targetProgress: 1,
-      ),
-      Achievement(
-        id: 'profile_created',
-        name: 'Bem-vindo!',
-        description: 'Crie seu perfil',
-        icon: Icons.person_add,
         difficulty: AchievementDifficulty.easy,
         requiredLevel: 1,
         targetProgress: 1,

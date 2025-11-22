@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/esp32_service.dart';
-import '../services/achievement_tracker.dart';
 import '../widgets/achievement_widget.dart';
 import 'dashboard_screen.dart';
 
@@ -12,10 +11,9 @@ class IPInputPage extends StatefulWidget {
 }
 
 class _IPInputPageState extends State<IPInputPage>
-    with AchievementDialogMixin {
+    with AchievementNotificationMixin {
   final TextEditingController _controller = TextEditingController();
   final ESP32Service _esp32Service = ESP32Service();
-  final AchievementTracker _tracker = AchievementTracker();
   String? _errorText;
   bool _isConnecting = false;
 
@@ -60,12 +58,8 @@ class _IPInputPageState extends State<IPInputPage>
     if (!mounted) return;
 
     if (isConnected) {
-      // Track first connection achievement
-      final leveledUp = await _tracker.onFirstConnection();
-
-      if (leveledUp && mounted) {
-        await showLevelUpDialog();
-      }
+      // Track first connection achievement with UI feedback
+      await trackFirstConnection();
 
       // Connection successful
       ScaffoldMessenger.of(context).showSnackBar(
@@ -77,10 +71,12 @@ class _IPInputPageState extends State<IPInputPage>
       );
 
       // Navigate to dashboard
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const DashboardPage()),
-      );
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const DashboardPage()),
+        );
+      }
     } else {
       // Connection failed
       setState(() {
@@ -238,7 +234,7 @@ class _IPInputPageState extends State<IPInputPage>
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.blue[900]?.withOpacity(0.3),
+                color: Colors.blue[900]?.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.blue[700]!, width: 1),
               ),
