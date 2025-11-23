@@ -16,8 +16,6 @@ class PlantCard {
   final String wateringFrequency;
   final String soilMoisture;
   final String harvestHeight;
-  final List<String> nutritionalBenefits;
-  final List<String> tips;
 
   PlantCard({
     required this.id,
@@ -35,8 +33,6 @@ class PlantCard {
     required this.wateringFrequency,
     required this.soilMoisture,
     required this.harvestHeight,
-    required this.nutritionalBenefits,
-    required this.tips,
   });
 
   factory PlantCard.fromJson(Map<String, dynamic> json) {
@@ -56,8 +52,6 @@ class PlantCard {
       wateringFrequency: json['wateringFrequency'] as String,
       soilMoisture: json['soilMoisture'] as String,
       harvestHeight: json['harvestHeight'] as String,
-      nutritionalBenefits: List<String>.from(json['nutritionalBenefits'] as List),
-      tips: List<String>.from(json['tips'] as List),
     );
   }
 
@@ -78,8 +72,6 @@ class PlantCard {
       'wateringFrequency': wateringFrequency,
       'soilMoisture': soilMoisture,
       'harvestHeight': harvestHeight,
-      'nutritionalBenefits': nutritionalBenefits,
-      'tips': tips,
     };
   }
 
@@ -100,8 +92,6 @@ class PlantCard {
       wateringFrequency: wateringFrequency,
       soilMoisture: soilMoisture,
       harvestHeight: harvestHeight,
-      nutritionalBenefits: nutritionalBenefits,
-      tips: tips,
     );
   }
 

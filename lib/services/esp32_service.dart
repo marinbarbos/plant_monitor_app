@@ -288,15 +288,15 @@ extension PlantStatusExtension on PlantStatus {
   String get imagePath {
     switch (this) {
       case PlantStatus.thriving:
-        return 'assets/images/plant_thriving.png';
+        return 'assets/icons/happylittleguy.png';
       case PlantStatus.healthy:
-        return 'assets/images/plant_healthy.png';
+        return 'assets/icons/sprout1.png';
       case PlantStatus.stressed:
-        return 'assets/images/plant_stressed.png';
+        return 'assets/icons/farming.png';
       case PlantStatus.struggling:
-        return 'assets/images/plant_struggling.png';
+        return 'assets/icons/farming.png';
       case PlantStatus.critical:
-        return 'assets/images/plant_critical.png';
+        return 'assets/icons/warmcrop.png';
     }
   }
 

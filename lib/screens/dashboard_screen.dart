@@ -403,7 +403,7 @@ class _DashboardPageState extends State<DashboardPage>
                 height: 120,
                 errorBuilder: (context, error, stackTrace) {
                   return Image.asset(
-                    'assets/images/sprout.png',
+                    'assets/icons/sprout.png',
                     height: 120,
                   );
                 },

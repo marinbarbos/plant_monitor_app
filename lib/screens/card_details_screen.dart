@@ -81,31 +81,6 @@ class CardDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Nutritional Benefits
-            _buildSection(
-              title: 'Benefícios Nutricionais',
-              icon: Icons.favorite,
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: card.nutritionalBenefits
-                    .map((benefit) => _buildBenefitChip(benefit))
-                    .toList(),
-              ),
-            ),
-
-            // Tips
-            _buildSection(
-              title: 'Dicas de Cultivo',
-              icon: Icons.lightbulb_outline,
-              child: Column(
-                children: card.tips
-                    .map((tip) => _buildTipItem(tip))
-                    .toList(),
-              ),
-            ),
-
             const SizedBox(height: 20),
           ],
         ),
@@ -359,61 +334,5 @@ class CardDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBenefitChip(String benefit) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.green.withValues(alpha:0.2),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green.withValues(alpha:0.5)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 16),
-          const SizedBox(width: 6),
-          Text(
-            benefit,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildTipItem(String tip) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.grey[850],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.amber.withValues(alpha:0.3)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Icon(
-            Icons.arrow_right,
-            color: Colors.amber,
-            size: 24,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              tip,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 15,
-                height: 1.4,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
