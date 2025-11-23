@@ -351,12 +351,6 @@ class _DashboardPageState extends State<DashboardPage>
         ),
         const SizedBox(height: 20),
 
-        // Emoji Status
-        Text(
-          status.emoji,
-          style: const TextStyle(fontSize: 80),
-        ),
-        const SizedBox(height: 12),
 
         // Status Name
         Container(
@@ -424,6 +418,12 @@ class _DashboardPageState extends State<DashboardPage>
             ],
           ),
         ),
+        // Emoji Status
+        Text(
+          status.emoji,
+          style: const TextStyle(fontSize: 80),
+        ),
+        const SizedBox(height: 12),
       ],
     );
   }
